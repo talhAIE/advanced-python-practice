@@ -1,2 +1,6 @@
-java
 python
+n8n
+learn ai
+fix the list
+mango
+apple

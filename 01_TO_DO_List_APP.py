@@ -1,46 +1,25 @@
-# TO do list
-from modules.functions import get_todos,write_todos
-import time
-time_now=time.strftime("%b %d, %Y %H:%M:%S")
-print(f"it is {time_now}")
+todo=[]
+
 while True:
-    user_action=input("Type add, show, edit, complete or exit: ")
-    user_action=user_action.strip()
+    user_action=input("Type add, show, edit, exit: ")
+    user_action=user_action.strip().lower()
 
-    if  user_action.startswith('add'):
-        todo=user_action[4:]
-        todos=get_todos('todo.txt')
-        todos.append(todo+'\n')
-        write_todos("todo.txt",todos)
+    match user_action:
+        case 'add':
+            todo_item=input("Enter a todo item: ")
+            todo.append(todo_item)
+        
+        case 'show' | 'display':
+            for item in todo:
+                print(item)
+        
+        case 'edit':
+            number=int(input("Enter the number of the todo item to edit: "))
+            number-=1
+            todo[number]=input("Enter the new todo item: ")      
+        case 'exit' | 'quit':
+            break
 
-    elif user_action.startswith('show'):
-        todos=get_todos('todo.txt')     
-        for i,item in enumerate(todos):
-            print(f"{i+1}. {item.strip('\n')}")
-        print(f"Total items: {len(todos)}")
-
-    elif user_action.startswith('edit'):
-        try:
-            num=int(user_action[5:])
-            todos=get_todos(filepath='todo.txt')
-            todos[num-1]=input("Enter the new item: ") + "\n"
-            write_todos("todo.txt",todos)
-        except ValueError:
-            print("Your Enter wrong input")
-            continue
-
-    elif user_action.startswith('complete'):
-        try:
-            num=int(user_action[9:])
-            todos=get_todos('todo.txt')
-            complete=todos.pop(num-1)
-            print(f"{complete} completed")
-            write_todos("todo.txt",todos)
-        except IndexError:
-            print("There is no item with that number")
-    elif 'exit' in user_action or 'quit' in user_action:
-        break
-    else:
-        print("Invalssid input")
-
-    # till day 1
+        case _:
+            print("Invalid command. please try again.")
+print('Goodbye!')

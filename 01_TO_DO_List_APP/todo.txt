@@ -5,3 +5,7 @@ fix the list
 mango
 apple
 ai agents
+learn gui
+learn simpleGUI
+Good Job
+talha good yar

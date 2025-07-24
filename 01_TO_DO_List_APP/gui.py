@@ -2,12 +2,18 @@ import functions
 import time
 import FreeSimpleGUI as fsg
 import functions
+import os
+
+if not os.path.exists("todos.txt"):
+    with open("todo.txt","w") as file:
+        pass
+
 fsg.theme("GreenTan")
 label=fsg.Text("Type in a to-do")
 
 input_box=fsg.InputText(tooltip="Enter a to-do",key='todo')
 
-add_button=fsg.Button(size=7,image_source="01_TO_DO_List_APP/add.png",key='Add' )
+add_button=fsg.Button("Add",size=7 )
 
 clock_text=fsg.Text(" ",key='clock')
 list_box=fsg.Listbox(values=functions.get_todos(),key='todos',
